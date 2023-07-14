@@ -16,9 +16,9 @@ import java.util.Arrays;
 public class telajogo extends AppCompatActivity {
 
     Button btniniciar,btnred, btnblue, btnyellow, btngreen, btnreset;
-    TextView view;
+    TextView view,highscore;
 
-    int score=0, state=0, multi;
+    int score=0, state=0, multi, highScore=0;
     int [] jogo;
 
     private SecureRandom secureRandom = new SecureRandom();
@@ -39,12 +39,14 @@ public class telajogo extends AppCompatActivity {
         btngreen = findViewById(R.id.btnverde);
         btnyellow = findViewById(R.id.btnamarelo);
         view = findViewById(R.id.view);
+        highscore = findViewById(R.id.pontumax);
 
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
         int score = sharedPreferences.getInt(PREF_SCORE, 0);
 
         view.setText("Pontuação: " + score);
+        highscore.setText("Maior pontuação: " + highScore);
 
         btnreset.setOnClickListener(new View.OnClickListener()
         {
