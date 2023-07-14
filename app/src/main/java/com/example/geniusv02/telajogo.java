@@ -85,4 +85,30 @@ public class telajogo extends AppCompatActivity {
             }
         });
     }
+
+    public int[] gerarSequencia()
+    {
+        jogo = new int[1];
+        jogo[0] = secureRandom.nextInt(4);
+        return jogo;
+    }
+
+    public void adicionarValor(int valor, TextView v)
+    {
+        if (state <= 50)
+        {
+            state++;
+            int[] novaSequencia = new int[state];
+            for (int i = 0; i < jogo.length; i++) {
+                novaSequencia[i] = jogo[i];
+            }
+            novaSequencia[(jogo.length)] = valor;
+            jogo = new int[state];
+            jogo = novaSequencia;
+        }
+        else
+        {
+            gameover = true;
+        }
+    }
 }
