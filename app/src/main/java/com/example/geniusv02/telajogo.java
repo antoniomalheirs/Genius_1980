@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class telajogo extends AppCompatActivity {
 
-    Button btnvoltar,btnred, btnblue, btnyellow, btngreen, btnreset;
+    Button btniniciar,btnred, btnblue, btnyellow, btngreen, btnreset;
     TextView view;
 
     int score=0, state=0, multi;
@@ -33,7 +33,7 @@ public class telajogo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telajogo);
 
-        btnvoltar = findViewById(R.id.btninicio);
+        btniniciar = findViewById(R.id.btninicio);
         btnblue = findViewById(R.id.btnazul);
         btnred = findViewById(R.id.btnvermelho);
         btnreset = findViewById(R.id.btnreset);
@@ -52,6 +52,12 @@ public class telajogo extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                if (state >= 1 && gameover == true)
+                {
+                    Intent intent = new Intent(getApplicationContext(), telajogo.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -87,11 +93,30 @@ public class telajogo extends AppCompatActivity {
             }
         });
 
-        btnvoltar.setOnClickListener(new View.OnClickListener()
+        btniniciar.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                if (gameover == false && start==false && state==0)
+                {
+                    state++;
+                    start=true;
+                    jogo = gerarSequencia();
+
+                    blinkcores(btnred,btnblue,btngreen,btnyellow);
+
+                    Handler pausaclick = new Handler();
+                    pausaclick.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            btnred.setClickable(true);
+                            btnblue.setClickable(true);
+                            btnyellow.setClickable(true);
+                            btngreen.setClickable(true);
+                        }
+                    }, multi);
+                }
             }
         });
     }
