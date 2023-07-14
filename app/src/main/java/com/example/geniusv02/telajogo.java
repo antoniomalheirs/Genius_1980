@@ -54,6 +54,7 @@ public class telajogo extends AppCompatActivity {
             {
             }
         });
+
         btnred.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -61,6 +62,7 @@ public class telajogo extends AppCompatActivity {
             {
             }
         });
+
         btngreen.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -68,6 +70,7 @@ public class telajogo extends AppCompatActivity {
             {
             }
         });
+
         btnblue.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -75,6 +78,7 @@ public class telajogo extends AppCompatActivity {
             {
             }
         });
+
         btnyellow.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -82,6 +86,7 @@ public class telajogo extends AppCompatActivity {
             {
             }
         });
+
         btnvoltar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -120,7 +125,6 @@ public class telajogo extends AppCompatActivity {
 
     private void salvandoPreferences(int score)
     {
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(PREF_SCORE, score);
         editor.apply();
@@ -195,13 +199,32 @@ public class telajogo extends AppCompatActivity {
                 score++;
                 if (score == jogo.length)
                 {
-
+                    score = 0;
+                    adicionarValor(secureRandom.nextInt(4));
+                    blinkcores(btnred, btnblue, btngreen, btnyellow);
+                    Handler pausaclick = new Handler();
+                    pausaclick.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            btnred.setClickable(true);
+                            btnblue.setClickable(true);
+                            btngreen.setClickable(true);
+                            btnyellow.setClickable(true);
+                        }
+                    }, multi);
                 }
             }
             else
             {
-
-
+                gameover = true;
+                btnred.setClickable(false);
+                btnblue.setClickable(false);
+                btngreen.setClickable(false);
+                btnyellow.setClickable(false);
+                salvandoPreferences(score);
+                Toast.makeText(getApplicationContext(), "GAME OVER! " + score + " pontos.", Toast.LENGTH_SHORT).show();
             }
         }
     }
