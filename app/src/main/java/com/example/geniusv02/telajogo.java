@@ -18,12 +18,12 @@ public class telajogo extends AppCompatActivity {
     Button btniniciar,btnred, btnblue, btnyellow, btngreen, btnreset;
     TextView view,highscore;
 
-    int score=0, state=0, multi, highScore=0;
+    int score=0, state=0, multi, highScore=0,scoree;
     int [] jogo;
 
     private SecureRandom secureRandom = new SecureRandom();
     private SharedPreferences sharedPreferences;
-    private static final String PREF_SCORE = "pref_score";
+    private static final String PREF_SCORE = "pref_score", PREF_HIGH_SCORE = "pref_highscore";
 
     boolean gameover = false, start=false;
 
@@ -43,7 +43,8 @@ public class telajogo extends AppCompatActivity {
 
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
-        int score = sharedPreferences.getInt(PREF_SCORE, 0);
+        highScore = pontuacaoMax();
+        scoree = sharedPreferences.getInt(PREF_SCORE, 0);
 
         view.setText("Pontuação: " + score);
         highscore.setText("Maior pontuação: " + highScore);
@@ -71,6 +72,15 @@ public class telajogo extends AppCompatActivity {
                 {
                     jogadaplayer(0);
                 }
+
+                Handler antibug = new Handler();
+                antibug.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        btnblue.setClickable(true);
+                    }
+                }, 1000);
             }
         });
 
@@ -83,6 +93,15 @@ public class telajogo extends AppCompatActivity {
                 {
                     jogadaplayer(1);
                 }
+
+                Handler antibug = new Handler();
+                antibug.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        btnblue.setClickable(true);
+                    }
+                }, 1000);
             }
         });
 
@@ -95,6 +114,15 @@ public class telajogo extends AppCompatActivity {
                 {
                     jogadaplayer(2);
                 }
+
+                Handler antibug = new Handler();
+                antibug.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        btnblue.setClickable(true);
+                    }
+                }, 1000);
             }
         });
 
@@ -107,6 +135,15 @@ public class telajogo extends AppCompatActivity {
                 {
                     jogadaplayer(3);
                 }
+
+                Handler antibug = new Handler();
+                antibug.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        btnblue.setClickable(true);
+                    }
+                }, 1000);
             }
         });
 
@@ -123,8 +160,8 @@ public class telajogo extends AppCompatActivity {
 
                     blinkcores(btnred,btnblue,btngreen,btnyellow);
 
-                    Handler pausaclick = new Handler();
-                    pausaclick.postDelayed(new Runnable() {
+                    Handler retornaclick = new Handler();
+                    retornaclick.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             btnred.setClickable(true);
@@ -136,8 +173,8 @@ public class telajogo extends AppCompatActivity {
                 }
                 else if (gameover == false && start==false && state >= 1)
                 {
-                    Handler start = new Handler();
-                    start.postDelayed(new Runnable()
+                    Handler comeca = new Handler();
+                    comeca.postDelayed(new Runnable()
                     {
                         @Override
                         public void run()
@@ -146,8 +183,8 @@ public class telajogo extends AppCompatActivity {
 
                             blinkcores(btnred,btnblue,btngreen,btnyellow);
 
-                            Handler pausaclick = new Handler();
-                            pausaclick.postDelayed(new Runnable()
+                            Handler retornaclick = new Handler();
+                            retornaclick.postDelayed(new Runnable()
                             {
                                 @Override
                                 public void run()
@@ -192,14 +229,25 @@ public class telajogo extends AppCompatActivity {
         }
     }
 
-    private void salvandoPreferences(int score)
+    private int pontuacaoMax()
+    {
+        return sharedPreferences.getInt(PREF_HIGH_SCORE, 0);
+    }
+
+    private void salvaPontuacao(int score)
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
         editor.putInt(PREF_SCORE, score);
         editor.apply();
 
-        TextView view = findViewById(R.id.view);
-        view.setText("Pontuação: " + score);
+        int highScore = pontuacaoMax();
+
+        if (score > highScore)
+        {
+            editor.putInt(PREF_HIGH_SCORE, score);
+            editor.apply();
+        }
     }
 
     private void blinkcores(Button red, Button blue, Button green, Button yellow)
@@ -209,11 +257,11 @@ public class telajogo extends AppCompatActivity {
         btnyellow.setClickable(false);
         btngreen.setClickable(false);
 
-        Handler pausablink = new Handler();
+        Handler blinkcores = new Handler();
         for (int i = 0; i < jogo.length; i++)
         {
             int fseq = i;
-            pausablink.postDelayed(new Runnable()
+            blinkcores.postDelayed(new Runnable()
             {
                 @Override
                 public void run()
@@ -237,8 +285,8 @@ public class telajogo extends AppCompatActivity {
                             yellow.setPressed(true);
                             break;
                     }
-                    Handler setblinkdefault = new Handler();
-                    setblinkdefault.postDelayed(new Runnable()
+                    Handler voltapadrao = new Handler();
+                    voltapadrao.postDelayed(new Runnable()
                     {
                         @Override
                         public void run()
@@ -271,8 +319,8 @@ public class telajogo extends AppCompatActivity {
                     score = 0;
                     adicionarValor(secureRandom.nextInt(4));
                     blinkcores(btnred, btnblue, btngreen, btnyellow);
-                    Handler pausaclick = new Handler();
-                    pausaclick.postDelayed(new Runnable()
+                    Handler retornaclick = new Handler();
+                    retornaclick.postDelayed(new Runnable()
                     {
                         @Override
                         public void run()
@@ -292,7 +340,7 @@ public class telajogo extends AppCompatActivity {
                 btnblue.setClickable(false);
                 btngreen.setClickable(false);
                 btnyellow.setClickable(false);
-                salvandoPreferences(score);
+                salvaPontuacao(state);
                 Toast.makeText(getApplicationContext(), "GAME OVER! " + score + " pontos.", Toast.LENGTH_SHORT).show();
             }
         }
