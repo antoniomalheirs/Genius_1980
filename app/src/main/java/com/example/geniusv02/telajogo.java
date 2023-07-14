@@ -22,7 +22,6 @@ public class telajogo extends AppCompatActivity {
     int [] jogo;
 
     private SecureRandom secureRandom = new SecureRandom();
-    private boolean clickable = true;
     private SharedPreferences sharedPreferences;
     private static final String PREF_SCORE = "pref_score";
 
@@ -116,6 +115,33 @@ public class telajogo extends AppCompatActivity {
                             btngreen.setClickable(true);
                         }
                     }, multi);
+                }
+                else if (gameover == false && start==false && state >= 1)
+                {
+                    Handler start = new Handler();
+                    start.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            adicionarValor(secureRandom.nextInt(4));
+
+                            blinkcores(btnred,btnblue,btngreen,btnyellow);
+
+                            Handler pausaclick = new Handler();
+                            pausaclick.postDelayed(new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    btnred.setClickable(true);
+                                    btnblue.setClickable(true);
+                                    btnyellow.setClickable(true);
+                                    btngreen.setClickable(true);
+                                }
+                            }, multi);
+                        }
+                    }, 200);
                 }
             }
         });
