@@ -111,4 +111,59 @@ public class telajogo extends AppCompatActivity {
             gameover = true;
         }
     }
+
+    private void blinkcores(Button red, Button blue, Button green, Button yellow)
+    {
+        btnred.setClickable(false);
+        btnblue.setClickable(false);
+        btnyellow.setClickable(false);
+        btngreen.setClickable(false);
+
+        Handler pausablink = new Handler();
+        for (int i = 0; i < jogo.length; i++)
+        {
+            int fseq = i;
+            pausablink.postDelayed(new Runnable()
+            {
+                @Override
+                public void run() {
+                    switch (jogo[fseq])
+                    {
+                        case 0:
+                            red.setBackgroundColor(Color.rgb(255,169,169));
+                            red.setPressed(true);
+                            break;
+                        case 1:
+                            green.setBackgroundColor(Color.rgb(169,255,169));
+                            green.setPressed(true);
+                            break;
+                        case 2:
+                            blue.setBackgroundColor(Color.rgb(169,169,255));
+                            blue.setPressed(true);
+                            break;
+                        case 3:
+                            yellow.setBackgroundColor(Color.rgb(255,255,169));
+                            yellow.setPressed(true);
+                            break;
+                    }
+                    Handler setblinkdefault = new Handler();
+                    setblinkdefault.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run() {
+                            yellow.setBackgroundColor(Color.rgb(255,255,0));
+                            blue.setBackgroundColor(Color.rgb(0,0,255));
+                            green.setBackgroundColor(Color.rgb(0,255,0));
+                            red.setBackgroundColor(Color.rgb(255,0,0));
+                            red.setPressed(false);
+                            green.setPressed(false);
+                            blue.setPressed(false);
+                            yellow.setPressed(false);
+                        }
+                    }, 1000);
+                }
+            }, i * 1300);
+            multi = i * 1600;
+        }
+    }
 }
