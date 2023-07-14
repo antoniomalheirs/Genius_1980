@@ -13,7 +13,8 @@ import android.widget.Toast;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-public class telajogo extends AppCompatActivity {
+public class telajogo extends AppCompatActivity
+{
 
     Button btniniciar,btnred, btnblue, btnyellow, btngreen, btnreset;
     TextView view,highscore;
@@ -28,7 +29,8 @@ public class telajogo extends AppCompatActivity {
     boolean gameover = false, start=false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telajogo);
 
