@@ -65,6 +65,10 @@ public class telajogo extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                if (state >= 1)
+                {
+                    jogadaplayer(0);
+                }
             }
         });
 
@@ -73,6 +77,10 @@ public class telajogo extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                if (state >= 1)
+                {
+                    jogadaplayer(1);
+                }
             }
         });
 
@@ -81,6 +89,10 @@ public class telajogo extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                if (state >= 1)
+                {
+                    jogadaplayer(2);
+                }
             }
         });
 
@@ -89,6 +101,10 @@ public class telajogo extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                if (state >= 1)
+                {
+                    jogadaplayer(3);
+                }
             }
         });
 
