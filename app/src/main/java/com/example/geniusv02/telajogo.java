@@ -50,38 +50,43 @@ public class telajogo extends AppCompatActivity {
         btnreset.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
             }
         });
         btnred.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
             }
         });
         btngreen.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
             }
         });
         btnblue.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
             }
         });
         btnyellow.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
             }
         });
         btnvoltar.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
             }
         });
     }
@@ -93,13 +98,14 @@ public class telajogo extends AppCompatActivity {
         return jogo;
     }
 
-    public void adicionarValor(int valor, TextView v)
+    public void adicionarValor(int valor)
     {
         if (state <= 50)
         {
             state++;
             int[] novaSequencia = new int[state];
-            for (int i = 0; i < jogo.length; i++) {
+            for (int i = 0; i < jogo.length; i++)
+            {
                 novaSequencia[i] = jogo[i];
             }
             novaSequencia[(jogo.length)] = valor;
@@ -112,7 +118,8 @@ public class telajogo extends AppCompatActivity {
         }
     }
 
-    private void salvandoPreferences(int score) {
+    private void salvandoPreferences(int score)
+    {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(PREF_SCORE, score);
@@ -136,7 +143,8 @@ public class telajogo extends AppCompatActivity {
             pausablink.postDelayed(new Runnable()
             {
                 @Override
-                public void run() {
+                public void run()
+                {
                     switch (jogo[fseq])
                     {
                         case 0:
@@ -160,7 +168,8 @@ public class telajogo extends AppCompatActivity {
                     setblinkdefault.postDelayed(new Runnable()
                     {
                         @Override
-                        public void run() {
+                        public void run()
+                        {
                             yellow.setBackgroundColor(Color.rgb(255,255,0));
                             blue.setBackgroundColor(Color.rgb(0,0,255));
                             green.setBackgroundColor(Color.rgb(0,255,0));
@@ -174,6 +183,26 @@ public class telajogo extends AppCompatActivity {
                 }
             }, i * 1300);
             multi = i * 1600;
+        }
+    }
+
+    public void jogadaplayer(int btnId)
+    {
+        if (!gameover && btnId >= 0 && btnId <= 3)
+        {
+            if (btnId == jogo[score])
+            {
+                score++;
+                if (score == jogo.length)
+                {
+
+                }
+            }
+            else
+            {
+
+
+            }
         }
     }
 }
