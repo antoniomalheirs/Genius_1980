@@ -112,6 +112,16 @@ public class telajogo extends AppCompatActivity {
         }
     }
 
+    private void salvandoPreferences(int score) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(PREF_SCORE, score);
+        editor.apply();
+
+        TextView view = findViewById(R.id.view);
+        view.setText("Pontuação: " + score);
+    }
+
     private void blinkcores(Button red, Button blue, Button green, Button yellow)
     {
         btnred.setClickable(false);
