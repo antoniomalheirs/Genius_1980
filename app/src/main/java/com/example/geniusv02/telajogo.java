@@ -12,11 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.security.SecureRandom;
 import java.util.Arrays;
+
 public class telajogo extends AppCompatActivity {
+
     Button btnvoltar,btnred, btnblue, btnyellow, btngreen, btnreset;
-    TextView t,a;
+    TextView view;
+
     int score=0, state=0, multi;
     int [] jogo;
+
     private SecureRandom secureRandom = new SecureRandom();
     private boolean clickable = true;
     private SharedPreferences sharedPreferences;
@@ -35,8 +39,50 @@ public class telajogo extends AppCompatActivity {
         btnreset = findViewById(R.id.btnreset);
         btngreen = findViewById(R.id.btnverde);
         btnyellow = findViewById(R.id.btnamarelo);
-        t = findViewById(R.id.view);
+        view = findViewById(R.id.view);
 
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+
+        int score = sharedPreferences.getInt(PREF_SCORE, 0);
+
+        view.setText("Pontuação: " + score);
+
+        btnreset.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        btnred.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        btngreen.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        btnblue.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        btnyellow.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        btnvoltar.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
-
 }
